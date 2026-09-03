@@ -47,3 +47,13 @@ po/*~
 
 # RStudio Connect folder
 rsconnect/
+
+
+# Private & Proprietary Financial Data
+
+data/raw/*
+data/processed/*
+
+# Preserve directory structure using placeholder files
+!data/raw/.gitkeep
+!data/processed/.gitkeep
