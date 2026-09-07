@@ -47,3 +47,22 @@ po/*~
 
 # RStudio Connect folder
 rsconnect/
+
+# Block raw and processed firm data files
+data/raw/*
+data/processed/*
+
+# Keep directory structures intact on GitHub via .gitkeep
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+!output/figures/.gitkeep
+!output/tables/.gitkeep
+
+# Ignore bulk data files
+*.csv
+*.rds
+*.xlsx
+*.parquet
+
+# Exception: Force track formatted CSV summary tables in output/
+!output/tables/*.csv
