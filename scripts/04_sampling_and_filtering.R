@@ -1,35 +1,43 @@
- 
 
-# Stratified Random Sampling & filtering COVID Years
+# SCRIPT 4: STRATIFIED SAMPLING, FILTERS & WINSORIZATION
+# Purpose: Sample 100 firms, filter ex-COVID quarters, and Winsorize margin deltas.
+# ==============================================================================
 
+library(tidyverse)
 
 set.seed(42)
 
-# Sectoral Mapping
+# Custom Base R Winsorization helper (no external dependencies)
+winsorize_vec <- function(x, low = 0.01, high = 0.99) {
+  q <- quantile(x, probs = c(low, high), na.rm = TRUE)
+  pmax(pmin(x, q[2]), q[1])
+}
 
+# 1. Sectoral Cohort Mapping (GICS Sectors)
 firm_sectors <- firm_oil_data |>
   distinct(gvkey, gsector) |>
-  filter( gsector %in% c(10, 15, 25, 30, 35)) |>
+  filter(gsector %in% c(10, 15, 25, 30, 35)) |>
   mutate(energy_group = if_else(gsector %in% c(10, 15), "High_Energy", "Low_Energy"))
 
-# Random Sampling 
-
+# 2. Stratified Random Sampling (50 Group A / 50 Group B)
 sampled_firms <- firm_sectors |>
   group_by(energy_group) |>
   slice_sample(n = 50) |>
   ungroup()
 
-# Cutoff 1st and 99th percentile
-
-p01 <- quantile(firm_oil_data$OPM, 0.01, na.rm = TRUE)
-p99 <- quantile(firm_oil_data$OPM, 0.99, na.rm = TRUE)
-
-# Filtering out COVID years mentioned in proposal, and keeping the sampled firms and trimming outliers
-
+# 3. Simple Left Join & Filtering
 firm_oil_data_filtered <- firm_oil_data |>
+  # Simple left join to attach energy_group
+  left_join(sampled_firms |> select(gvkey, energy_group), by = "gvkey") |>
+  # Keep ONLY the sampled 100 firms
+  filter(!is.na(energy_group)) |>
+  # Remove COVID lockdown quarters
   filter(!year %in% c(2020, 2021)) |>
-  inner_join(sampled_firms |>select(gvkey, energy_group), by = "gvkey") |>
-  filter(OPM >= p01 & OPM <= p99)
+  # Drop missing lag values (2015 calibration quarters)
+  filter(!is.na(delta_opm_yoy), !is.na(crude_shock_yoy)) |>
+  mutate(delta_opm_yoy = winsorize_vec(delta_opm_yoy, low = 0.01, high = 0.99))
 
-summary(firm_oil_data_filtered$OPM)
+# Verify column existence and display summary
+summary(firm_oil_data_filtered$delta_opm_yoy)
 
+message("Script 04 Complete: Final unbalanced panel filtered and Winsorized.")
