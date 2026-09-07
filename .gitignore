@@ -49,7 +49,6 @@ po/*~
 rsconnect/
 
 
-
 # Block raw and processed firm data files
 data/raw/*
 data/processed/*
