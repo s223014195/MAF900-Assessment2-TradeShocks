@@ -4,12 +4,12 @@ A reproducible R workflow evaluating global energy trade shocks and firm-level o
 
 ## Executive Summary
 
-This empirical project investigates the firm-level transmission of significant global oil price shocks ($\ge 15\%$ YoY) on Operating Profit Margins ($\Delta\text{OPM}_{\text{YoY}}$) across a panel of 100 Indian manufacturing firms (2016 Q1 – 2025 Q4, ex-COVID). Using Welch's two-sample $t$-test, I evaluate whether firms in high energy-intensity sectors experience greater margin contractions compared to low energy-intensity cohorts during shock quarters.
+This empirical project investigates the firm-level transmission of significant global oil price shocks ($\ge 15\%$ YoY) on Operating Profit Margins ($\Delta\text{OPM}_{\text{it}}$) across a panel of 100 Indian manufacturing firms (2016 Q1 – 2025 Q4, ex-COVID). Using Welch's two-sample $t$-test, I evaluate whether firms in high energy-intensity sectors experience greater margin contractions compared to low energy-intensity cohorts during shock quarters.
 
 ### Key Empirical Findings
 
 * **Welch $t$-Test Result:** $t = -1.9086$, $p = 0.0568$ ($df = 615.38$, $95\%\text{ CI: } [-14.83\%, 0.21\%]$).
-* **Cohort Performance:** During energy shock quarters, High-Energy firms experienced a mean margin contraction of **$-2.35\%$**, whereas Low-Energy firms achieved a mean expansion of **$+4.96\%$**, yielding a net group difference of **$-7.31\text{ percentage points}$**.
+* **Sectoral Group Performance:** During energy shock quarters, High-Energy firms experienced a mean margin contraction of **$-2.35\%$**, whereas Low-Energy firms achieved a mean expansion of **$+4.96\%$**, yielding a net group difference of **$-7.31\text{ percentage points}$**.
 * **Hypothesis Decision:** At the standard $5\%$ significance threshold ($\alpha = 0.05$), we **fail to reject $H_0$** ($p = 0.0568 > 0.05$). However, the finding demonstrates **marginal significance at the $10\%$ level ($p < 0.10$)**.
 * **Economic Insight:** Indian manufacturing firms demonstrate notable operational resilience. While high energy intensity introduces directional margin pressure during global oil surges, cross-sectional variance indicates that pass-through capacity, inventory buffering, and long-term procurement contracts absorb a substantial portion of input cost volatility.
 
@@ -74,6 +74,6 @@ How to Reproduce Analysis
 Clone the repository: git clone <repo-url>
 Open the RStudio Project: Double-click the .Rproj file in the root directory.
 Obtain Data: Download the firm financial panel from Compustat Global and crude benchmarks from PPAC, then place raw .csv extracts into data/raw/.
-Execute Pipeline: Run scripts/05_visuals_and_analysis.R to execute data transformations, run the Welch t-test, and auto-export formatted tables and plots into output/.
+Execute Pipeline: Run scripts/ to execute data transformations, run the Welch t-test, and auto-export formatted tables and plots into output/.
 
    

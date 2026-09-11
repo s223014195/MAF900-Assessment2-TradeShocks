@@ -1,5 +1,17 @@
 
 # Script 1 Data Loading
+
+#Creating standard reproducible project directories
+
+dirs <- c("data/raw", "data/processed", "output/tables", "output/figures", "scripts")
+sapply(dirs, dir.create, recursive = TRUE, showWarnings = FALSE)
+
+file.create("data/raw/.gitkeep")
+file.create("data/processed/.gitkeep")
+file.create("output/tables/.gitkeep")
+file.create("output/figures/.gitkeep")
+
+
 # Downloading Raw data files from Compustat and PPAC
 
 # Required Packages
