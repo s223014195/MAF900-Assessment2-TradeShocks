@@ -47,10 +47,9 @@ ttest_table <- tidy(ttest_result) |>
     `95% CI`           = paste0("[", round(conf.low, 2), "%, ", round(conf.high, 2), "%]")
   )
 
-# 3. Print clean table to console
 kable(ttest_table, align = "c")
 
-# 4. Export to CSV
+# 3. Export to CSV
 write.csv(ttest_table, here("output", "tables", "welch_ttest_summary.csv"), row.names = FALSE)
 
 
@@ -86,7 +85,6 @@ ts_data <- firm_oil_proposal |>
   group_by(datadate, energy_group) |>
   summarise(
     avg_opm = mean(OPM, na.rm = TRUE),
-    # FIX: Cleaned column name without .y suffix
     crude_price = mean(crude_price_3mnths, na.rm = TRUE),
     .groups = "drop"
   )
