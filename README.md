@@ -36,13 +36,18 @@ Due to licensing constraints, raw proprietary firm financials are excluded from 
 | :--- | :--- | :--- | :--- |
 | **Global Company Key** | `gvkey` | Compustat Primary Key | Unique 6-digit firm identifier |
 | **Company Name** | `conm` | Compustat Identifier | Full legal name of the enterprise |
-| **Sector Classification** | `gsector` | Compustat GICS Sector | 2-digit GICS sector code used for cohort mapping |
+| **Sector Classification** | `gsector` | Compustat GICS Sector | 2-digit GICS sector code used for group mapping |
+| **Fiscal Year** | `fyearq` | Compustat Fiscal Year | Fiscal year of the reporting period |
+| **Fiscal Quarter** | `fqtr` | Compustat Fiscal Quarter | Fiscal quarter indicator (1–4) |
+| **Data Date** | `datadate` | Compustat Statement Date | Calendar date corresponding to the end of the fiscal quarter |
+| **Operating Income (Quarterly)** | `oiadpq` | Compustat Fundamental Quarterly | Operating income after depreciation and amortization expenses |
+| **Sales / Revenue (Quarterly)** | `saleq` | Compustat Fundamental Quarterly | Total net sales or revenue generated during the fiscal quarter |
 | **Operating Profit Margin** | `OPM` | `(oiadpq / saleq) * 100` | Operating Income After Depreciation / Sales |
-| **YoY Margin Change** | `delta_opm_yoy` | $\text{OPM}_{i,t} - \text{OPM}_{i,t-4}$ | Year-over-year margin shift (percentage points), Winsorized 1%/99% |
+| **YoY Margin Change** | `delta_opm_yoy` | $\\text{OPM}_{i,t} - \\text{OPM}_{i,t-4}$ | Year-over-year margin shift (percentage points), Winsorized 1%/99% |
 | **Macro Crude Price** | `crude_price_3mnths` | PPAC Crude Basket | Quarterly average crude oil price (USD) |
-| **Oil Shock Indicator** | `crude_shock_yoy` | $\frac{P_t - P_{t-4}}{P_{t-4}} \times 100 \ge 15\%$ | Binary flag for crude price increases $\ge 15\%$ YoY |
+| **Oil Shock Indicator** | `crude_shock_yoy` | $\\frac{P_t - P_{t-4}}{P_{t-4}} \\times 100 \\ge 15\\%$ | Binary flag for crude price increases $\\ge 15\\%$ YoY |
 | **Energy Intensity** | `energy_group` | GICS Sector Mapping | Binary group: `High_Energy` (GICS 10, 15) vs. `Low_Energy` (GICS 25, 30, 35) |
-
+"
 ---
 
 ## Project Structure & Reproducibility
